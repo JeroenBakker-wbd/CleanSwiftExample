@@ -1,0 +1,15 @@
+# XCode
+xcuserdata
+
+# OSX
+.DS_Store
+
+
+# bundler specific
+vendor/bundle
+.bundle
+
+# secrets/generated code
+.env
+generated
+apollo-ios-cli
