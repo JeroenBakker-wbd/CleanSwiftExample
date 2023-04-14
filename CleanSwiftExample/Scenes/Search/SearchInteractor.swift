@@ -25,10 +25,9 @@ actor SearchInteractor: SearchInteractable {
 // MARK: - SearchInteractable
 extension SearchInteractor {
     
-    func initalize(request: SearchLogic.Initialize.Request) async {
+    func load(initialize request: SearchLogic.Initialize.Request) async {
         guard !state.isLoading else { return }
         
-        state.retryAction = nil // not sure if I like this yet
         state.isLoading = true
         await output.present(loading: SearchLogic.Loading.Response(isLoading: state.isLoading))
         
@@ -39,7 +38,7 @@ extension SearchInteractor {
         } catch {
             state.retryAction = { [weak self] in
                 Task { [weak self] in
-                    await self?.initalize(request: SearchLogic.Initialize.Request())
+                    await self?.load(initialize: SearchLogic.Initialize.Request())
                 }
             }
             await output.present(error: SearchLogic.Error.Response())
@@ -47,5 +46,16 @@ extension SearchInteractor {
         
         state.isLoading = false
         await output.present(loading: SearchLogic.Loading.Response(isLoading: state.isLoading))
+    }
+    
+    func load(retry request: SearchLogic.Retry.Request) async {
+        state.retryAction?()
+        state.retryAction = nil
+    }
+    
+    func load(search request: SearchLogic.Search.Request) async {
+        guard !state.isLoading else { return }
+        
+        state.isLoading = true
     }
 }

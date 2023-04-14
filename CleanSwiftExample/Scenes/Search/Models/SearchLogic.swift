@@ -39,4 +39,18 @@ enum SearchLogic {
             let ctaTitle: String
         }
     }
+    
+    enum Retry {
+        struct Request { }
+    }
+    
+    enum Search {
+        struct Request {
+            let searchText: String
+        }
+        
+        struct Response { }
+        
+        struct ViewModel { }
+    }
 }

@@ -29,6 +29,7 @@
 		B08FDE5C29E985B0001C0CED /* LocalisationMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08FDE5B29E985B0001C0CED /* LocalisationMapper.swift */; };
 		B08FDE6029E98654001C0CED /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = B08FDE5F29E98654001C0CED /* Factory */; };
 		B08FDE6229E98670001C0CED /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08FDE6129E98670001C0CED /* DependencyManager.swift */; };
+		B08FDE6429E98F8A001C0CED /* SearchWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08FDE6329E98F8A001C0CED /* SearchWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		B08FDE5829E982F0001C0CED /* Assembling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assembling.swift; sourceTree = "<group>"; };
 		B08FDE5B29E985B0001C0CED /* LocalisationMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalisationMapper.swift; sourceTree = "<group>"; };
 		B08FDE6129E98670001C0CED /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
+		B08FDE6329E98F8A001C0CED /* SearchWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				B08FDE5429E98115001C0CED /* GetUserWorker.swift */,
+				B08FDE6329E98F8A001C0CED /* SearchWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				B08FDE0D29E97EA2001C0CED /* AppDelegate.swift in Sources */,
 				B08FDE0F29E97EA2001C0CED /* SceneDelegate.swift in Sources */,
 				B08FDE4629E97F9A001C0CED /* SearchInteractor.swift in Sources */,
+				B08FDE6429E98F8A001C0CED /* SearchWorker.swift in Sources */,
 				B08FDE4A29E97FA7001C0CED /* SearchState.swift in Sources */,
 				B08FDE5029E97FDF001C0CED /* SearchLogic.swift in Sources */,
 				B08FDE6229E98670001C0CED /* DependencyManager.swift in Sources */,

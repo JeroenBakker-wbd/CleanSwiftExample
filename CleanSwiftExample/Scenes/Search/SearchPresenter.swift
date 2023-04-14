@@ -31,4 +31,8 @@ struct SearchPresenter: SearchPresentable {
             ctaTitle: localisationMapper.map(key: .searchGetUserCTATitle)
         ))
     }
+    
+    func present(search response: SearchLogic.Search.Response) async {
+        await output?.show(search: SearchLogic.Search.ViewModel())
+    }
 }
