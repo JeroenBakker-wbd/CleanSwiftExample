@@ -80,7 +80,11 @@ extension SearchInteractor {
     }
     
     func load(detail request: SearchLogic.Detail.Request) async {
-        // call onFinish?
+        guard let searchResult = state.searchResults.first(where: { $0.id == request.id }) else {
+            return assertionFailure("Received an id which isn't stored, implementation issue?")
+        }
+        
+        actions.onDidTapSearchResult(searchResult)
     }
     
     func load(searchPagination request: SearchLogic.SearchPagination.Request) async {

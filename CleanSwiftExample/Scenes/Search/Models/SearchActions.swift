@@ -9,5 +9,5 @@ import Foundation
 
 struct SearchActions {
     
-    let onFinish: () -> ()
+    let onDidTapSearchResult: (SearchResults) -> ()
 }

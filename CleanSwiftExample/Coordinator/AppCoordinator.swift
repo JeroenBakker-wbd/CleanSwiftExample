@@ -18,8 +18,8 @@ final class AppCoordinator: UINavigationController {
     }
     
     func start() {
-        let searchActions = SearchActions {
-            print("Did finish search!")
+        let searchActions = SearchActions { searchResult in
+            print("Did tap searchResult \(searchResult.title)!") // open detail
         }
         
         let search = SearchAssembly().build(with: .default, actions: searchActions)
