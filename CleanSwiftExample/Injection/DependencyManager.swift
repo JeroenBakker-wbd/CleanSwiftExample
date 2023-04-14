@@ -17,6 +17,10 @@ extension DependencyContainer {
     var getUserWorker: DependencyManager<GetUserWorkerable> {
         self { GetUserWorker() }
     }
+    
+    var searchWorker: DependencyManager<SearchWorkerable> {
+        self { SearchWorker() }
+    }
 }
 
 // MARK: - Mappers

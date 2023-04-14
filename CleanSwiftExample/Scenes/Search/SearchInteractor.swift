@@ -14,6 +14,7 @@ actor SearchInteractor: SearchInteractable {
     private var state: SearchState
     
     @Dependency(\.getUserWorker) private var getUserWorker
+    @Dependency(\.searchWorker) private var searchWorker
     
     init(output: any SearchInteractorOutput, actions: SearchActions, state: SearchState) {
         self.output = output
@@ -44,8 +45,8 @@ extension SearchInteractor {
             await output.present(error: SearchLogic.Error.Response())
         }
         
+        await output.present(loading: SearchLogic.Loading.Response(isLoading: false))
         state.isLoading = false
-        await output.present(loading: SearchLogic.Loading.Response(isLoading: state.isLoading))
     }
     
     func load(retry request: SearchLogic.Retry.Request) async {
@@ -56,6 +57,52 @@ extension SearchInteractor {
     func load(search request: SearchLogic.Search.Request) async {
         guard !state.isLoading else { return }
         
+        state.searchText = request.searchText
+        state.searchOffset = 0
         state.isLoading = true
+        await output.present(loading: SearchLogic.Loading.Response(isLoading: state.isLoading))
+        
+        do {
+            let searchResults = try await searchWorker.invoke(with: request.searchText, offset: state.searchOffset, limit: state.searchLimit)
+            state.set(searchResults: searchResults)
+            await output.present(search: SearchLogic.Search.Response(searchResults: searchResults))
+        } catch {
+            state.retryAction = { [weak self] in
+                Task { [weak self] in
+                    await self?.load(search: request)
+                }
+            }
+            await output.present(error: SearchLogic.Error.Response())
+        }
+        
+        await output.present(loading: SearchLogic.Loading.Response(isLoading: false))
+        state.isLoading = false
+    }
+    
+    func load(detail request: SearchLogic.Detail.Request) async {
+        // call onFinish?
+    }
+    
+    func load(searchPagination request: SearchLogic.SearchPagination.Request) async {
+        guard !state.isLoading && !state.searchEndReached else { return }
+        
+        state.isLoading = true
+        await output.present(loading: SearchLogic.Loading.Response(isLoading: state.isLoading))
+        
+        do {
+            let searchResults = try await searchWorker.invoke(with: state.searchText, offset: state.searchOffset, limit: state.searchLimit)
+            state.set(searchResults: searchResults)
+            await output.present(searchPagination: SearchLogic.SearchPagination.Response(searchResults: searchResults))
+        } catch {
+            state.retryAction = { [weak self] in
+                Task { [weak self] in
+                    await self?.load(searchPagination: request)
+                }
+            }
+            await output.present(error: SearchLogic.Error.Response())
+        }
+        
+        await output.present(loading: SearchLogic.Loading.Response(isLoading: false))
+        state.isLoading = false
     }
 }

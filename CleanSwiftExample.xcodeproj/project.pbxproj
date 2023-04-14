@@ -30,6 +30,9 @@
 		B08FDE6029E98654001C0CED /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = B08FDE5F29E98654001C0CED /* Factory */; };
 		B08FDE6229E98670001C0CED /* DependencyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08FDE6129E98670001C0CED /* DependencyManager.swift */; };
 		B08FDE6429E98F8A001C0CED /* SearchWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08FDE6329E98F8A001C0CED /* SearchWorker.swift */; };
+		B08FDE6729E99308001C0CED /* SearchTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08FDE6629E99308001C0CED /* SearchTitleCell.swift */; };
+		B08FDE6929E9939F001C0CED /* SearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08FDE6829E9939F001C0CED /* SearchSection.swift */; };
+		B08FDE6B29E993B4001C0CED /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08FDE6A29E993B4001C0CED /* SearchItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +79,9 @@
 		B08FDE5B29E985B0001C0CED /* LocalisationMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalisationMapper.swift; sourceTree = "<group>"; };
 		B08FDE6129E98670001C0CED /* DependencyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyManager.swift; sourceTree = "<group>"; };
 		B08FDE6329E98F8A001C0CED /* SearchWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchWorker.swift; sourceTree = "<group>"; };
+		B08FDE6629E99308001C0CED /* SearchTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTitleCell.swift; sourceTree = "<group>"; };
+		B08FDE6829E9939F001C0CED /* SearchSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSection.swift; sourceTree = "<group>"; };
+		B08FDE6A29E993B4001C0CED /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +184,7 @@
 		B08FDE4029E97F75001C0CED /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				B08FDE6529E992FE001C0CED /* Cells */,
 				B08FDE4229E97F7D001C0CED /* Protocols */,
 				B08FDE4129E97F79001C0CED /* Models */,
 				B08FDE4329E97F94001C0CED /* SearchAssembly.swift */,
@@ -195,6 +202,8 @@
 				B08FDE4D29E97FD8001C0CED /* SearchActions.swift */,
 				B08FDE4F29E97FDF001C0CED /* SearchLogic.swift */,
 				B08FDE5129E97FEB001C0CED /* SearchEntry.swift */,
+				B08FDE6829E9939F001C0CED /* SearchSection.swift */,
+				B08FDE6A29E993B4001C0CED /* SearchItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -230,6 +239,14 @@
 				B08FDE6129E98670001C0CED /* DependencyManager.swift */,
 			);
 			path = Injection;
+			sourceTree = "<group>";
+		};
+		B08FDE6529E992FE001C0CED /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B08FDE6629E99308001C0CED /* SearchTitleCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,7 +387,9 @@
 			files = (
 				B08FDE5929E982F0001C0CED /* Assembling.swift in Sources */,
 				B08FDE3E29E97F03001C0CED /* AppCoordinator.swift in Sources */,
+				B08FDE6929E9939F001C0CED /* SearchSection.swift in Sources */,
 				B08FDE4429E97F94001C0CED /* SearchAssembly.swift in Sources */,
+				B08FDE6B29E993B4001C0CED /* SearchItem.swift in Sources */,
 				B08FDE5729E98202001C0CED /* SearchProtocols.swift in Sources */,
 				B08FDE4C29E97FB0001C0CED /* SearchViewController.swift in Sources */,
 				B08FDE4829E97FA0001C0CED /* SearchPresenter.swift in Sources */,
@@ -380,6 +399,7 @@
 				B08FDE4629E97F9A001C0CED /* SearchInteractor.swift in Sources */,
 				B08FDE6429E98F8A001C0CED /* SearchWorker.swift in Sources */,
 				B08FDE4A29E97FA7001C0CED /* SearchState.swift in Sources */,
+				B08FDE6729E99308001C0CED /* SearchTitleCell.swift in Sources */,
 				B08FDE5029E97FDF001C0CED /* SearchLogic.swift in Sources */,
 				B08FDE6229E98670001C0CED /* DependencyManager.swift in Sources */,
 				B08FDE5C29E985B0001C0CED /* LocalisationMapper.swift in Sources */,

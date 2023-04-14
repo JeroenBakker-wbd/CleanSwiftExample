@@ -33,6 +33,24 @@ struct SearchPresenter: SearchPresentable {
     }
     
     func present(search response: SearchLogic.Search.Response) async {
-        await output?.show(search: SearchLogic.Search.ViewModel())
+        await output?.show(search: SearchLogic.Search.ViewModel(
+            searchDataSourceItem: response.searchResults.map({ searchResult in
+                SearchDataSourceItem.results(SearchTitleCell.ViewModel(
+                    id: searchResult.id,
+                    title: searchResult.title
+                ))
+            })
+        ))
+    }
+    
+    func present(searchPagination response: SearchLogic.SearchPagination.Response) async {
+        await output?.show(searchPagination: SearchLogic.SearchPagination.ViewModel(
+            searchDataSourceItem: response.searchResults.map({ searchResult in
+                SearchDataSourceItem.results(SearchTitleCell.ViewModel(
+                    id: searchResult.id,
+                    title: searchResult.title
+                ))
+            })
+        ))
     }
 }

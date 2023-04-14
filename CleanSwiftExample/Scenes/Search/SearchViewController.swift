@@ -15,6 +15,9 @@ final class SearchViewController: UIViewController, SearchViewInput {
     private lazy var searchBar: UISearchBar = makeSearchBar()
     private lazy var titleLabel: UILabel = makeTitleLabel()
     
+    private lazy var collectionView: UICollectionView = makeCollectionView()
+    private lazy var dataSource: UICollectionViewDiffableDataSource<SearchDataSourceSection, SearchDataSourceItem> = makeDataSource()
+    
     var output: SearchViewOutput!
     
     override func viewDidLoad() {
@@ -53,7 +56,18 @@ extension SearchViewController {
     
     @MainActor
     func show(search viewModel: SearchLogic.Search.ViewModel) async {
-        // show results in a list
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteAllItems()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(viewModel.searchDataSourceItem, toSection: .main)
+        await dataSource.apply(snapshot, animatingDifferences: true)
+    }
+    
+    @MainActor
+    func show(searchPagination viewModel: SearchLogic.SearchPagination.ViewModel) async {
+        var snapshot = dataSource.snapshot()
+        snapshot.appendItems(viewModel.searchDataSourceItem, toSection: .main)
+        await dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
 
@@ -77,6 +91,30 @@ extension SearchViewController: UISearchBarDelegate {
     }
 }
 
+// MARK: - UICollectionViewDelegate
+extension SearchViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else {
+            return
+        }
+        
+        switch item {
+        case .results(let viewModel):
+            Task { await output.load(detail: SearchLogic.Detail.Request(id: viewModel.id)) }
+        }
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView.contentOffset.y >= scrollView.contentSize.height - scrollView.frame.size.height else {
+            return
+        }
+        
+        Task { await output.load(searchPagination: SearchLogic.SearchPagination.Request()) }
+    }
+}
+
+
 // MARK: - Actions
 private extension SearchViewController {
     
@@ -97,8 +135,9 @@ private extension SearchViewController {
         navigationItem.titleView = searchBar
         
         view.addSubview(titleLabel)
-        view.addSubview(spinnerView)
+        view.addSubview(collectionView)
         view.addSubview(retryButton)
+        view.addSubview(spinnerView)
         
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 120),
@@ -108,6 +147,11 @@ private extension SearchViewController {
             spinnerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             spinnerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             spinnerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            
+            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
             retryButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 100),
             retryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
@@ -157,5 +201,50 @@ private extension SearchViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView))
         tapGesture.cancelsTouchesInView = false
         return tapGesture
+    }
+    
+    func makeCollectionView() -> UICollectionView {
+        let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: makeCompositionalLayout())
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.backgroundColor = .systemBackground
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.delegate = self
+        collectionView.register(SearchTitleCell.self, forCellWithReuseIdentifier: SearchTitleCell.reuseIdentifier)
+        return collectionView
+    }
+    
+    func makeCompositionalLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(2/5))
+            
+            let layoutItem = NSCollectionLayoutItem(layoutSize: itemSize)
+            layoutItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 20, trailing: 0)
+            
+            let layoutGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.93), heightDimension: .estimated(250))
+            
+            let layoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: layoutGroupSize, subitems: [layoutItem])
+            
+            let layoutSection = NSCollectionLayoutSection(group: layoutGroup)
+            
+            return layoutSection
+        }
+
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 0
+        layout.configuration = config
+        return layout
+    }
+    
+    func makeDataSource() -> UICollectionViewDiffableDataSource<SearchDataSourceSection, SearchDataSourceItem> {
+        return .init(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
+            switch item {
+            case .results(let viewModel):
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: item.reuseIdentifier, for: indexPath) as? SearchTitleCell else {
+                    fatalError("Forgot to register SearchPhotosResultCell")
+                }
+                cell.update(with: viewModel)
+                return cell
+            }
+        })
     }
 }

@@ -49,8 +49,30 @@ enum SearchLogic {
             let searchText: String
         }
         
-        struct Response { }
+        struct Response {
+            let searchResults: [SearchResults]
+        }
         
-        struct ViewModel { }
+        struct ViewModel {
+            let searchDataSourceItem: [SearchDataSourceItem]
+        }
+    }
+    
+    enum Detail {
+        struct Request {
+            let id: String
+        }
+    }
+    
+    enum SearchPagination {
+        struct Request { }
+        
+        struct Response {
+            let searchResults: [SearchResults]
+        }
+        
+        struct ViewModel {
+            let searchDataSourceItem: [SearchDataSourceItem]
+        }
     }
 }
