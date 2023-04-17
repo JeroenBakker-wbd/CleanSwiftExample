@@ -55,7 +55,7 @@ extension SearchInteractor {
     }
     
     func load(search request: SearchLogic.Search.Request) async {
-        guard !state.isLoading else { return }
+        guard !state.isLoading && state.searchText != request.searchText else { return }
         
         state.searchText = request.searchText
         state.searchOffset = 0
