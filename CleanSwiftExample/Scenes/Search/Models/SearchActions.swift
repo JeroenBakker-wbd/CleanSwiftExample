@@ -9,5 +9,5 @@ import Foundation
 
 struct SearchActions {
     
-    let onDidTapSearchResult: (SearchResults) -> ()
+    let onDidTapSearchResult: @Sendable (SearchResults) -> ()
 }

@@ -17,7 +17,7 @@ struct SearchState {
     var searchLimit: Int = 20
     var searchEndReached: Bool = false
     
-    var retryAction: (() -> Void)? = nil
+    var retryAction: (@Sendable () -> Void)? = nil
     
     mutating func set(searchResults: [SearchResults]) {
         self.searchResults = searchResults

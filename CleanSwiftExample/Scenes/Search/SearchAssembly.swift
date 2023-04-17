@@ -8,11 +8,11 @@
 import UIKit
 import SwiftUI
 
-struct SearchAssembly: Assembling {
+@MainActor struct SearchAssembly: Assembling {
     
     private let useSwiftUI: Bool = true // debug flag, for showing swiftui implementation purpose
 
-    func build(with sceneModel: SearchEntry, actions: SearchActions) -> UIViewController {
+    func build(with sceneModel: SearchEntry, actions: SearchActions) async -> UIViewController {
         if useSwiftUI {
             let viewModel = SearchViewModel()
             let view = SearchView(viewModel: viewModel)

@@ -18,7 +18,7 @@ final class SearchViewController: UIViewController, SearchViewInput {
     private lazy var collectionView: UICollectionView = makeCollectionView()
     private lazy var dataSource: UICollectionViewDiffableDataSource<SearchDataSourceSection, SearchDataSourceItem> = makeDataSource()
     
-    var output: SearchViewOutput!
+    var output: (any SearchViewOutput)!
     
     override func viewDidLoad() {
         super.viewDidLoad()

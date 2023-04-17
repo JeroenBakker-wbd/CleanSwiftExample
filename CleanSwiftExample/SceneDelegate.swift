@@ -21,6 +21,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let coordinator = AppCoordinator()
         window?.rootViewController = coordinator
         window?.makeKeyAndVisible()
-        coordinator.start()
+        
+        Task { await coordinator.start() }
     }
 }

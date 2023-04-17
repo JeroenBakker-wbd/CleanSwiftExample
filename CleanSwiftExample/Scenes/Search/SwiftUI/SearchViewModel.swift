@@ -15,7 +15,7 @@ final class SearchViewModel: ObservableObject, SearchViewInput {
     @Published private(set) var retryButtonTitle: String?
     @Published private(set) var searchDataSourceItem: [SearchDataSourceItem] = []
     
-    var output: SearchViewOutput?
+    var output: (any SearchViewOutput)?
 }
 
 // MARK: - SearchViewInput

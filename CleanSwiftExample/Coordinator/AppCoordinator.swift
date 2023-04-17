@@ -17,12 +17,12 @@ final class AppCoordinator: UINavigationController {
         fatalError("storyboard not supported")
     }
     
-    func start() {
+    func start() async {
         let searchActions = SearchActions { searchResult in
             print("Did tap searchResult \(searchResult.title)!") // open detail
         }
         
-        let search = SearchAssembly().build(with: .default, actions: searchActions)
+        let search = await SearchAssembly().build(with: .default, actions: searchActions)
         setViewControllers([search], animated: false)
     }
 }

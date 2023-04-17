@@ -15,7 +15,7 @@ protocol SearchInteractable {
     func load(detail request: SearchLogic.Detail.Request) async
 }
 
-protocol SearchPresentable {
+protocol SearchPresentable: Sendable {
     func present(initalize response: SearchLogic.Initialize.Response) async
     func present(loading response: SearchLogic.Loading.Response) async
     func present(error response: SearchLogic.Error.Response) async

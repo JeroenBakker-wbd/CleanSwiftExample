@@ -11,5 +11,5 @@ public protocol Assembling {
     associatedtype Model
     associatedtype Actions
 
-    func build(with: Self.Model, actions: Self.Actions) -> UIViewController
+    func build(with: Self.Model, actions: Self.Actions) async -> UIViewController
 }

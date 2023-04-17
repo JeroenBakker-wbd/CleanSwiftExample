@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SearchPresenter: SearchPresentable {
+struct SearchPresenter: SearchPresentable, @unchecked Sendable {
     
     @Dependency(\.localisationMapper) private var localisationMapper
     
