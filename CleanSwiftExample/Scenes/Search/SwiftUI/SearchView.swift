@@ -9,8 +9,12 @@ import SwiftUI
 
 struct SearchView: View {
     
-    @StateObject var viewModel: SearchViewModel
+    @StateObject private var viewModel: SearchViewModel
     @State private var searchText: String = ""
+    
+    init(viewModel: SearchViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
     
     var body: some View {
         NavigationStack {
@@ -31,7 +35,7 @@ struct SearchView: View {
                             }
                         }
                     }
-                }
+                }.scrollDismissesKeyboard(.interactively)
                 if let retryTitle = viewModel.retryButtonTitle {
                     Button(retryTitle) {
                         Task { await viewModel.output?.load(retry: .init()) }
