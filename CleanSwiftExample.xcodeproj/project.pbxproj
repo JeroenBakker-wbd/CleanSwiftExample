@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B0710D5E29ED3A5B0054CF04 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0710D5D29ED3A5B0054CF04 /* SearchView.swift */; };
 		B0710D6029ED3A920054CF04 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0710D5F29ED3A920054CF04 /* SearchViewModel.swift */; };
+		B0710D6329EEC28D0054CF04 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = B0710D6229EEC28D0054CF04 /* Apollo */; };
 		B08FDE0D29E97EA2001C0CED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08FDE0C29E97EA2001C0CED /* AppDelegate.swift */; };
 		B08FDE0F29E97EA2001C0CED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08FDE0E29E97EA2001C0CED /* SceneDelegate.swift */; };
 		B08FDE1629E97EA3001C0CED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B08FDE1529E97EA3001C0CED /* Assets.xcassets */; };
@@ -35,6 +36,8 @@
 		B08FDE6729E99308001C0CED /* SearchTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08FDE6629E99308001C0CED /* SearchTitleCell.swift */; };
 		B08FDE6929E9939F001C0CED /* SearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08FDE6829E9939F001C0CED /* SearchSection.swift */; };
 		B08FDE6B29E993B4001C0CED /* SearchItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08FDE6A29E993B4001C0CED /* SearchItem.swift */; };
+		B0D94BB429EECED400DE779D /* StarWarsAPI in Frameworks */ = {isa = PBXBuildFile; productRef = B0D94BB329EECED400DE779D /* StarWarsAPI */; };
+		B0D94BB729EEE21900DE779D /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D94BB629EEE21900DE779D /* APIWorker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +89,8 @@
 		B08FDE6629E99308001C0CED /* SearchTitleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTitleCell.swift; sourceTree = "<group>"; };
 		B08FDE6829E9939F001C0CED /* SearchSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSection.swift; sourceTree = "<group>"; };
 		B08FDE6A29E993B4001C0CED /* SearchItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchItem.swift; sourceTree = "<group>"; };
+		B0D94BB229EECEC700DE779D /* StarWarsAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = StarWarsAPI; sourceTree = "<group>"; };
+		B0D94BB629EEE21900DE779D /* APIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWorker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +99,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B08FDE6029E98654001C0CED /* Factory in Frameworks */,
+				B0710D6329EEC28D0054CF04 /* Apollo in Frameworks */,
+				B0D94BB429EECED400DE779D /* StarWarsAPI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,13 +139,22 @@
 			path = UIKit;
 			sourceTree = "<group>";
 		};
+		B0710D6429EEC6860054CF04 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B08FDE0029E97EA2001C0CED = {
 			isa = PBXGroup;
 			children = (
+				B0D94BB129EECEC700DE779D /* Packages */,
 				B08FDE0B29E97EA2001C0CED /* CleanSwiftExample */,
 				B08FDE2229E97EA3001C0CED /* CleanSwiftExampleTests */,
 				B08FDE2C29E97EA3001C0CED /* CleanSwiftExampleUITests */,
 				B08FDE0A29E97EA2001C0CED /* Products */,
+				B0710D6429EEC6860054CF04 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -243,6 +259,7 @@
 			children = (
 				B08FDE5429E98115001C0CED /* GetUserWorker.swift */,
 				B08FDE6329E98F8A001C0CED /* SearchWorker.swift */,
+				B0D94BB629EEE21900DE779D /* APIWorker.swift */,
 			);
 			path = Workers;
 			sourceTree = "<group>";
@@ -271,6 +288,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		B0D94BB129EECEC700DE779D /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				B0D94BB229EECEC700DE779D /* StarWarsAPI */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -289,6 +314,8 @@
 			name = CleanSwiftExample;
 			packageProductDependencies = (
 				B08FDE5F29E98654001C0CED /* Factory */,
+				B0710D6229EEC28D0054CF04 /* Apollo */,
+				B0D94BB329EECED400DE779D /* StarWarsAPI */,
 			);
 			productName = CleanSwiftExample;
 			productReference = B08FDE0929E97EA2001C0CED /* CleanSwiftExample.app */;
@@ -364,6 +391,7 @@
 			mainGroup = B08FDE0029E97EA2001C0CED;
 			packageReferences = (
 				B08FDE5E29E98654001C0CED /* XCRemoteSwiftPackageReference "Factory" */,
+				B0710D6129EEC28D0054CF04 /* XCRemoteSwiftPackageReference "apollo-ios" */,
 			);
 			productRefGroup = B08FDE0A29E97EA2001C0CED /* Products */;
 			projectDirPath = "";
@@ -416,6 +444,7 @@
 				B08FDE5729E98202001C0CED /* SearchProtocols.swift in Sources */,
 				B08FDE4C29E97FB0001C0CED /* SearchViewController.swift in Sources */,
 				B08FDE4829E97FA0001C0CED /* SearchPresenter.swift in Sources */,
+				B0D94BB729EEE21900DE779D /* APIWorker.swift in Sources */,
 				B08FDE5229E97FEB001C0CED /* SearchEntry.swift in Sources */,
 				B08FDE0D29E97EA2001C0CED /* AppDelegate.swift in Sources */,
 				B0710D5E29ED3A5B0054CF04 /* SearchView.swift in Sources */,
@@ -754,6 +783,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B0710D6129EEC28D0054CF04 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		B08FDE5E29E98654001C0CED /* XCRemoteSwiftPackageReference "Factory" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Factory";
@@ -765,10 +802,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B0710D6229EEC28D0054CF04 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B0710D6129EEC28D0054CF04 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
 		B08FDE5F29E98654001C0CED /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B08FDE5E29E98654001C0CED /* XCRemoteSwiftPackageReference "Factory" */;
 			productName = Factory;
+		};
+		B0D94BB329EECED400DE779D /* StarWarsAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StarWarsAPI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

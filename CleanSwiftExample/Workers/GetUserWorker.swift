@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import StarWarsAPI
 
 struct User: Equatable {
     let firstName: String
@@ -18,8 +19,11 @@ protocol GetUserWorkerable {
 
 struct GetUserWorker: GetUserWorkerable {
     
+    @Dependency(\.apiWorker) private var apiWorker
+    
     func invoke() async throws -> User {
-        try await Task.sleep(for: .seconds(2))
-        return User(firstName: "Clean", lastName: "Swift")
+        let data = try await apiWorker.fetch(query: PersonNameQuery(personId: "1"))
+        
+        return User(firstName: data.person?.name ?? "Unknown", lastName: "Swift")
     }
 }

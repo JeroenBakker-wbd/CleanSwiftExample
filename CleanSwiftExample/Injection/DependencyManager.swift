@@ -21,6 +21,10 @@ extension DependencyContainer {
     var searchWorker: DependencyManager<SearchWorkerable> {
         self { SearchWorker() }
     }
+    
+    var apiWorker: DependencyManager<APIWorkerable> {
+        self { APIWorker() }
+    }
 }
 
 // MARK: - Mappers

@@ -1,0 +1,5 @@
+query PersonName($personId: ID) {
+  person(personID: $personId) {
+    name
+  }
+}
